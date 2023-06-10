@@ -118,7 +118,7 @@ class BigramLanguageModel(nn.Module):
         pos_emb = self.position_embedding_table(torch.arange(T, device=device)) # (T, C)
         x = token_emb + pos_emb # (B, T, C)
         x = self.sa_heads(x) # apply self attention heads
-        logits = self.lm_head(token_emb)# (B,T,vocab_size)
+        logits = self.lm_head(x)# (B,T,vocab_size)
 
         if targets is None:
             loss = None
